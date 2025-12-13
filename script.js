@@ -9,26 +9,7 @@ let answerRectangles= []; // store ALL rectangles so that each answered question
   // Custom styles to hide street names and point-of-interest markers
 const MAP_STYLES = [
   {
-    // Hide text labels on roads (street names)
-    featureType: "road",
-    elementType: "labels.text",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    // Hide little road icons (arrows, etc.)
-    featureType: "road",
-    elementType: "labels.icon",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    // Hide labels for POIs like restaurants, stores, etc.
-    featureType: "poi",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    // Hide labels for transit stops
-    featureType: "transit",
+    featureType: "all",
     elementType: "labels",
     stylers: [{ visibility: "off" }],
   },
