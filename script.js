@@ -15,9 +15,14 @@ const MAP_STYLES = [
   },
 ];
 
-//------------------------------------------------
+//-------------------------------------------------------------------------------------------------
 // Extra Feature 1 & 3: Timer and High Score
-//------------------------------------------------
+// Timer: I added a countdown timer using setInterval. Every second it updates the timer text. 
+//        If time reaches 0, It stops the timer and show the final score
+// High Score: My extra feature is persistent high score using localStorage. 
+// When the quiz loads, I read the saved best score and display it. If you beat it, I overwrite the stored value
+//-------------------------------------------------------------------------------------------------
+
 let timerId = null; // Stores the ID of the timer interval so we can stop the timer later.
 let timeLeft = 0; // Stores how many seconds remain on the countdown.
 
@@ -149,6 +154,8 @@ function initMap() {
   if (statusEl) statusEl.textContent = "";  // clear any previous text
 
   // create the map
+  // google.maps.Map is the class that creates the map object and renders it into your <div id="map">
+  // You create it inside initMap() (your init function) so the map gets built when the API finishes loading
   map = new google.maps.Map(document.getElementById("map"), {  // map container
     center: { lat: 34.24, lng: -118.53 }, // nice campus overview
     zoom: 16.51,
@@ -159,7 +166,8 @@ function initMap() {
     keyboardShortcuts: false,
     zoomControl: false,
     fullscreenControl: false, // disable full-screen view
-    streetViewControl: false, // disable Pegman / street view
+    streetViewControl: false, // So Pegman is hidden and users can’t switch into Street View 
+                              // important for a quiz so they don’t cheat by going street level
     panControl: false,    // disable panning control
     mapTypeControl: false,  // disable map type control
     disableDefaultUI: true, // disable all default UI
@@ -333,9 +341,11 @@ function resetQuiz() {
 // Expose initMap so the Google Maps script callback can find it
 window.initMap = initMap;
 
-//------------------------------------------------
-// Extra Feature 2: Play Again Button 
-//------------------------------------------------
+//-------------------------------------------------------------------------------------------------
+// Extra Feature 2: Play Again Button
+// Play Again: I added a Play Again button that resets everything in code so no page refresh
+// It also clears the old answer rectangles so the map is clean for the next round
+//-------------------------------------------------------------------------------------------------
 const playAgainBtn = document.getElementById("play-again");
 if (playAgainBtn) {
   playAgainBtn.addEventListener("click", resetQuiz);
